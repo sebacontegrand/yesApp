@@ -14,7 +14,10 @@ const inter = Inter({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yescard.vercel.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL 
+  || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : null)
+  || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null)
+  || 'https://yescard.vercel.app';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

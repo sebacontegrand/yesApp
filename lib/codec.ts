@@ -1,11 +1,78 @@
 import { CardConfig, CardAnswer } from './types';
 
 /**
+ * Maps CardConfig to a minified JSON object with 1-2 character keys.
+ */
+function toMinified(config: CardConfig): any {
+  return {
+    v: config.version,
+    n: config.senderName,
+    a: config.senderAvatar,
+    q: config.question,
+    t: config.theme,
+    s: config.steps?.map((step) => ({
+      i: step.id,
+      y: step.type,
+      l: step.label,
+      r: step.required ? 1 : 0,
+      o: step.options?.map((opt) => ({
+        i: opt.id,
+        l: opt.label,
+        ic: opt.icon,
+      })),
+    })),
+    c: config.confirmation
+      ? {
+          ti: config.confirmation.title,
+          su: config.confirmation.subtitle,
+          co: config.confirmation.confetti ? 1 : 0,
+        }
+      : undefined,
+  };
+}
+
+/**
+ * Reconstructs CardConfig from a minified JSON object.
+ */
+function fromMinified(min: any): CardConfig {
+  return {
+    version: min.v || 1,
+    senderName: min.n || '',
+    senderAvatar: min.a || 'love-letter',
+    question: min.q || '',
+    theme: min.t || 'rose',
+    steps: (min.s || []).map((step: any) => ({
+      id: step.i,
+      type: step.y,
+      label: step.l,
+      required: step.r === 1,
+      options: step.o?.map((opt: any) => ({
+        id: opt.i,
+        label: opt.l,
+        icon: opt.ic || '✨',
+      })),
+    })),
+    confirmation: min.c
+      ? {
+          title: min.c.ti || '',
+          subtitle: min.c.su || '',
+          confetti: min.c.co === 1,
+        }
+      : {
+          title: "It's a date! 🎉",
+          subtitle: "Can't wait! I will see you then.",
+          confetti: true,
+        },
+  };
+}
+
+/**
  * Encodes a CardConfig object into a URL-safe Base64 string.
  */
 export function encodeConfig(config: CardConfig): string {
   try {
-    const json = JSON.stringify(config);
+    const minified = toMinified(config);
+    const json = JSON.stringify(minified);
     let base64 = '';
     if (typeof window === 'undefined') {
       base64 = Buffer.from(json).toString('base64');
@@ -40,7 +107,12 @@ export function decodeConfig(data: string): CardConfig | null {
     } else {
       decoded = decodeURIComponent(escape(atob(base64)));
     }
-    const config = JSON.parse(decoded) as CardConfig;
+    const parsed = JSON.parse(decoded);
+    
+    // Support both new minified format and legacy format
+    const config = parsed && typeof parsed === 'object' && 'v' in parsed
+      ? fromMinified(parsed)
+      : (parsed as CardConfig);
     
     // Quick validation of the structure
     if (config && typeof config === 'object' && config.version === 1 && typeof config.senderName === 'string') {

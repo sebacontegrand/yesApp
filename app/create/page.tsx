@@ -565,7 +565,8 @@ export default function CreatorPage() {
                   <div className="grid sm:grid-cols-2 gap-3">
                     <WhatsappShareButton
                       url={shareUrl}
-                      title={`Your contact ${config.senderName || 'Someone'} sent you a YesCard ✨`}
+                      title={`Your contact ${config.senderName || 'Someone'} sent you a special invitation! ✨ Can you say YES?`}
+                      separator="\n\n"
                       className="flex-1"
                     >
                       <div className="py-3 rounded-2xl flex items-center justify-center gap-2 text-white font-semibold text-sm shadow-sm transition-colors w-full [&_svg]:!w-5 [&_svg]:!h-5" style={{ backgroundColor: '#25D366' }}>

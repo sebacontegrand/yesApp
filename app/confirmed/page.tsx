@@ -108,13 +108,13 @@ function ConfirmedPageContent() {
   const renderAnswerText = (step: CardStep, answerValue: string | string[]) => {
     if (step.type === 'date-picker') {
       try {
-        const d = new Date(answerValue as string);
-        return d.toLocaleDateString('en-US', {
+        const [y,m,d] = (answerValue as string).split('-').map(Number);
+        const dateObj = new Date(y, m - 1, d);
+        return dateObj.toLocaleDateString('en-US', {
           weekday: 'long',
           year: 'numeric',
           month: 'long',
           day: 'numeric',
-          timeZone: 'UTC', // Safe static format
         });
       } catch {
         return answerValue as string;

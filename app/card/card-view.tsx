@@ -206,7 +206,7 @@ function CardViewContent() {
   // Custom Inline Calendar Generator
   const renderCalendar = (stepId: string) => {
     const selectedDateStr = getAnswerForStep(stepId) as string | undefined;
-    const selectedDate = selectedDateStr ? new Date(selectedDateStr) : null;
+    const selectedDate = selectedDateStr ? (() => { const [y,m,d] = selectedDateStr.split('-').map(Number); return new Date(y, m - 1, d); })() : null;
     
     const year = currentMonth.getFullYear();
     const month = currentMonth.getMonth();

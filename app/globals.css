@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+}
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+/* Default Theme - Falls back to Rose colors */
+:root {
+  --theme-bg-gradient: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+  --theme-bg-gradient-dark: linear-gradient(135deg, #4c0519 0%, #881337 100%);
+  --theme-card-bg: rgba(255, 255, 255, 0.8);
+  --theme-card-bg-dark: rgba(15, 23, 42, 0.7);
+  --theme-primary: #e11d48;
+  --theme-primary-hover: #be123c;
+  --theme-primary-text: #9f1239;
+  --theme-primary-text-dark: #ffe4e6;
+  --theme-accent: #fda4af;
+  --theme-text-main: #4c0519;
+  --theme-text-main-dark: #fff1f2;
+}
+
+/* Theme Mappings */
+.theme-rose {
+  --theme-bg-gradient: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+  --theme-bg-gradient-dark: linear-gradient(135deg, #4c0519 0%, #881337 100%);
+  --theme-card-bg: rgba(255, 255, 255, 0.82);
+  --theme-card-bg-dark: rgba(15, 23, 42, 0.75);
+  --theme-primary: #ec4899;
+  --theme-primary-hover: #db2777;
+  --theme-primary-text: #9f1239;
+  --theme-primary-text-dark: #ffe4e6;
+  --theme-accent: #f43f5e;
+  --theme-text-main: #4c0519;
+  --theme-text-main-dark: #fff1f2;
+}
+
+.theme-violet {
+  --theme-bg-gradient: linear-gradient(135deg, #f5f3ff 0%, #eedeff 100%);
+  --theme-bg-gradient-dark: linear-gradient(135deg, #2e1065 0%, #4c1d95 100%);
+  --theme-card-bg: rgba(255, 255, 255, 0.82);
+  --theme-card-bg-dark: rgba(15, 23, 42, 0.75);
+  --theme-primary: #8b5cf6;
+  --theme-primary-hover: #7c3aed;
+  --theme-primary-text: #5b21b6;
+  --theme-primary-text-dark: #eedeff;
+  --theme-accent: #a78bfa;
+  --theme-text-main: #2e1065;
+  --theme-text-main-dark: #f5f3ff;
+}
+
+.theme-ocean {
+  --theme-bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  --theme-bg-gradient-dark: linear-gradient(135deg, #0c4a6e 0%, #075985 100%);
+  --theme-card-bg: rgba(255, 255, 255, 0.82);
+  --theme-card-bg-dark: rgba(15, 23, 42, 0.75);
+  --theme-primary: #0284c7;
+  --theme-primary-hover: #0369a1;
+  --theme-primary-text: #075985;
+  --theme-primary-text-dark: #e0f2fe;
+  --theme-accent: #38bdf8;
+  --theme-text-main: #0c4a6e;
+  --theme-text-main-dark: #f0f9ff;
+}
+
+.theme-sunset {
+  --theme-bg-gradient: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  --theme-bg-gradient-dark: linear-gradient(135deg, #7c2d12 0%, #9a3412 100%);
+  --theme-card-bg: rgba(255, 255, 255, 0.82);
+  --theme-card-bg-dark: rgba(15, 23, 42, 0.75);
+  --theme-primary: #ea580c;
+  --theme-primary-hover: #ca8a04;
+  --theme-primary-text: #9a3412;
+  --theme-primary-text-dark: #ffedd5;
+  --theme-accent: #f97316;
+  --theme-text-main: #7c2d12;
+  --theme-text-main-dark: #fff7ed;
+}
+
+.theme-forest {
+  --theme-bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  --theme-bg-gradient-dark: linear-gradient(135deg, #14532d 0%, #166534 100%);
+  --theme-card-bg: rgba(255, 255, 255, 0.82);
+  --theme-card-bg-dark: rgba(15, 23, 42, 0.75);
+  --theme-primary: #16a34a;
+  --theme-primary-hover: #15803d;
+  --theme-primary-text: #166534;
+  --theme-primary-text-dark: #dcfce7;
+  --theme-accent: #4ade80;
+  --theme-text-main: #14532d;
+  --theme-text-main-dark: #f0fdf4;
+}
+
+.theme-noir {
+  --theme-bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  --theme-bg-gradient-dark: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+  --theme-card-bg: rgba(255, 255, 255, 0.85);
+  --theme-card-bg-dark: rgba(30, 41, 59, 0.7);
+  --theme-primary: #0f172a;
+  --theme-primary-hover: #1e293b;
+  --theme-primary-text: #0f172a;
+  --theme-primary-text-dark: #f8fafc;
+  --theme-accent: #64748b;
+  --theme-text-main: #0f172a;
+  --theme-text-main-dark: #f8fafc;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+/* Glassmorphism custom classes */
+.glass-panel {
+  background: var(--theme-card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass-panel {
+    background: var(--theme-card-bg-dark);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Heartbeat pulse animation keyframes */
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.06);
+  }
+  40% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.5s infinite ease-in-out;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 9999px;
+}
+
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}

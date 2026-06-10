@@ -53,7 +53,6 @@ export default function CreatorPage() {
 
   // Share URL state
   const [shareUrl, setShareUrl] = useState('');
-  const [shortening, setShortening] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -161,33 +160,10 @@ export default function CreatorPage() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const shortenUrl = async (longUrl: string): Promise<string> => {
-    try {
-      const res = await fetch(`/api/shorten?url=${encodeURIComponent(longUrl)}`);
-      const data = await res.json();
-      return data.url || longUrl;
-    } catch {
-      return longUrl;
-    }
-  };
-
-  const [shortUrl, setShortUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    setShortUrl(null);
-  }, [config]);
-
-  const handleWhatsAppShare = async () => {
-    setShortening(true);
-    let link = shortUrl;
-    if (!link) {
-      link = await shortenUrl(shareUrl);
-      setShortUrl(link);
-    }
-    setShortening(false);
+  const handleWhatsAppShare = () => {
     const sender = config.senderName || 'Someone';
     const text = encodeURIComponent(
-      `Your contact ${sender} sent you a YesCard ✨\n\n${link}`
+      `Your contact ${sender} sent you a YesCard ✨\n\n${shareUrl}`
     );
     window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
   };
@@ -596,15 +572,9 @@ export default function CreatorPage() {
                   <div className="grid sm:grid-cols-2 gap-3">
                     <button
                       onClick={handleWhatsAppShare}
-                      disabled={shortening}
-                      className="py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-500 text-white font-semibold text-sm shadow-sm flex items-center justify-center gap-2 cursor-pointer transition-colors text-center"
+                      className="py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-sm flex items-center justify-center gap-2 cursor-pointer transition-colors text-center"
                     >
-                      {shortening ? (
-                        <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      ) : (
-                        <Share2 className="w-4.5 h-4.5" />
-                      )}
-                      {shortening ? 'Shortening...' : 'Share on WhatsApp'}
+                      <Share2 className="w-4.5 h-4.5" /> Share on WhatsApp
                     </button>
                     <button
                       onClick={handleCopyLink}

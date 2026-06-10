@@ -185,7 +185,11 @@ export default function CreatorPage() {
       setShortUrl(link);
     }
     setShortening(false);
-    window.open(`https://wa.me/?text=${encodeURIComponent(link)}`, '_blank', 'noopener,noreferrer');
+    const sender = config.senderName || 'Someone';
+    const text = encodeURIComponent(
+      `Your contact ${sender} sent you a YesCard ✨\n\n${link}`
+    );
+    window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
   };
 
   const selectedTheme = CARD_THEMES.find((t) => t.key === config.theme) || CARD_THEMES[0];

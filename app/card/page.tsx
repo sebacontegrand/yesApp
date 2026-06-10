@@ -231,9 +231,10 @@ function CardViewContent() {
     ];
 
     const handleDateSelect = (date: Date) => {
-      const offsetDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-      const isoString = offsetDate.toISOString().split('T')[0];
-      saveAnswer(stepId, isoString);
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
+      saveAnswer(stepId, `${y}-${m}-${d}`);
     };
 
     const changeMonth = (offset: number) => {

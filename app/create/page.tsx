@@ -231,7 +231,7 @@ export default function CreatorPage() {
                       placeholder="e.g. Lucas"
                       value={config.senderName}
                       onChange={(e) => setConfig({ ...config, senderName: e.target.value })}
-                      className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-rose-500/30 focus:border-rose-500 transition-all font-medium text-sm"
+                      className="w-full px-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-500/30 focus:border-rose-500 transition-all font-medium text-sm"
                     />
                   </div>
 
@@ -246,7 +246,7 @@ export default function CreatorPage() {
                       placeholder="Do you want to go out with me?"
                       value={config.question}
                       onChange={(e) => setConfig({ ...config, question: e.target.value })}
-                      className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-rose-500/30 focus:border-rose-500 transition-all font-medium text-sm"
+                      className="w-full px-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-500/30 focus:border-rose-500 transition-all font-medium text-sm"
                     />
                   </div>
 
@@ -387,7 +387,7 @@ export default function CreatorPage() {
                                       placeholder="e.g. Choose a date"
                                       value={step.label}
                                       onChange={(e) => updateStepLabel(step.id, e.target.value)}
-                                      className="w-full px-3 py-2 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-xl focus:outline-none focus:border-violet-500 font-medium text-xs"
+                                      className="w-full px-3 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 shadow-sm rounded-xl focus:outline-none focus:border-violet-500 font-medium text-xs"
                                     />
                                   </div>
 
@@ -413,7 +413,7 @@ export default function CreatorPage() {
                                               maxLength={2}
                                               value={opt.icon}
                                               onChange={(e) => updateOption(step.id, opt.id, 'icon', e.target.value)}
-                                              className="w-10 text-center py-1 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg text-xs"
+                                              className="w-10 text-center py-1 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm rounded-lg text-xs"
                                               placeholder="✨"
                                             />
                                             {/* Label Input */}
@@ -421,7 +421,7 @@ export default function CreatorPage() {
                                               type="text"
                                               value={opt.label}
                                               onChange={(e) => updateOption(step.id, opt.id, 'label', e.target.value)}
-                                              className="flex-1 px-2.5 py-1 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg text-xs"
+                                              className="flex-1 px-2.5 py-1 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm rounded-lg text-xs"
                                               placeholder="Option name"
                                             />
                                             {/* Remove option button */}
@@ -477,7 +477,7 @@ export default function CreatorPage() {
                           confirmation: { ...config.confirmation, title: e.target.value },
                         })
                       }
-                      className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-rose-500/30 focus:border-rose-500 transition-all font-medium text-sm"
+                      className="w-full px-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-500/30 focus:border-rose-500 transition-all font-medium text-sm"
                     />
                   </div>
 
@@ -497,7 +497,7 @@ export default function CreatorPage() {
                           confirmation: { ...config.confirmation, subtitle: e.target.value },
                         })
                       }
-                      className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-rose-500/30 focus:border-rose-500 transition-all font-medium text-sm"
+                      className="w-full px-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-500/30 focus:border-rose-500 transition-all font-medium text-sm"
                     />
                   </div>
 
@@ -553,7 +553,7 @@ export default function CreatorPage() {
                           type="text"
                           readOnly
                           value={shareUrl}
-                          className="flex-1 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs text-slate-500 truncate focus:outline-none"
+                          className="flex-1 px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs text-slate-500 truncate shadow-sm focus:outline-none"
                         />
                         <button
                           onClick={handleCopyLink}

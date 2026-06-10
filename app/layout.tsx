@@ -14,9 +14,26 @@ const inter = Inter({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yescard.vercel.app';
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "YesCard — Custom Shareable Interactive Invitations",
   description: "Create a fun invitation where your recipient can only say YES! Customize questions, choose themes, and share instantly via WhatsApp or link.",
+  openGraph: {
+    type: "website",
+    siteName: "YesCard",
+    title: "YesCard — Custom Shareable Interactive Invitations",
+    description: "Create a fun invitation where your recipient can only say YES! Customize questions, choose themes, and share instantly via WhatsApp or link.",
+    url: "/",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "YesCard" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "YesCard — Custom Shareable Interactive Invitations",
+    description: "Create a fun invitation where your recipient can only say YES! Customize questions, choose themes, and share instantly via WhatsApp or link.",
+    images: ["/opengraph-image"],
+  },
 };
 
 export default function RootLayout({

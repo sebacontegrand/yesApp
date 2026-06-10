@@ -185,11 +185,7 @@ export default function CreatorPage() {
       setShortUrl(link);
     }
     setShortening(false);
-    const sender = config.senderName || 'Someone';
-    const text = encodeURIComponent(
-      `Hey! ${sender} sent you a special invitation link. You can check it out here:\n\n${link}`
-    );
-    window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
+    window.open(`https://wa.me/?text=${encodeURIComponent(link)}`, '_blank', 'noopener,noreferrer');
   };
 
   const selectedTheme = CARD_THEMES.find((t) => t.key === config.theme) || CARD_THEMES[0];

@@ -20,6 +20,7 @@ import {
   Eye,
   Lock
 } from 'lucide-react';
+import { WhatsappShareButton, WhatsappIcon } from 'react-share';
 import { QRCodeSVG } from 'qrcode.react';
 import { CardConfig, CardStep, StepOption, StepType, SENDER_AVATARS, CARD_THEMES } from '@/lib/types';
 import { encodeConfig } from '@/lib/codec';
@@ -158,14 +159,6 @@ export default function CreatorPage() {
     navigator.clipboard.writeText(shareUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleWhatsAppShare = () => {
-    const sender = config.senderName || 'Someone';
-    const text = encodeURIComponent(
-      `Your contact ${sender} sent you a YesCard ✨\n\n${shareUrl}`
-    );
-    window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
   };
 
   const selectedTheme = CARD_THEMES.find((t) => t.key === config.theme) || CARD_THEMES[0];
@@ -570,12 +563,15 @@ export default function CreatorPage() {
 
                   {/* Actions buttons */}
                   <div className="grid sm:grid-cols-2 gap-3">
-                    <button
-                      onClick={handleWhatsAppShare}
-                      className="py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-sm flex items-center justify-center gap-2 cursor-pointer transition-colors text-center"
+                    <WhatsappShareButton
+                      url={shareUrl}
+                      title={`Your contact ${config.senderName || 'Someone'} sent you a YesCard ✨`}
+                      className="flex-1"
                     >
-                      <Share2 className="w-4.5 h-4.5" /> Share on WhatsApp
-                    </button>
+                      <div className="py-3 rounded-2xl flex items-center justify-center gap-2 text-white font-semibold text-sm shadow-sm transition-colors w-full [&_svg]:!w-5 [&_svg]:!h-5" style={{ backgroundColor: '#25D366' }}>
+                        <WhatsappIcon size={20} round /> Share on WhatsApp
+                      </div>
+                    </WhatsappShareButton>
                     <button
                       onClick={handleCopyLink}
                       className="py-3.5 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold text-sm hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center justify-center gap-2 cursor-pointer transition-all"

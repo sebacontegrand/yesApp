@@ -472,7 +472,7 @@ function CardViewContent() {
                               className={`p-4 rounded-2xl border text-left flex flex-col justify-between aspect-square transition-all cursor-pointer ${
                                 isSelected
                                   ? 'border-rose-500 bg-rose-500/10 text-rose-600 dark:text-rose-450 scale-[1.03] shadow-md shadow-rose-500/5'
-                                  : 'border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 hover:bg-slate-100 text-slate-800 dark:text-slate-200'
+                                  : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 text-slate-800 dark:text-slate-200 shadow-sm'
                               }`}
                             >
                               <span className="text-3xl">{opt.icon || '✨'}</span>
@@ -491,7 +491,7 @@ function CardViewContent() {
                           maxLength={200}
                           value={(currentStepAnswer as string) || ''}
                           onChange={(e) => saveAnswer(stepConfig.id, e.target.value)}
-                          className="w-full h-32 px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-900/60 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/30 focus:border-rose-500 transition-all font-medium text-sm resize-none"
+                          className="w-full h-32 px-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-500/30 focus:border-rose-500 transition-all font-medium text-sm resize-none"
                         />
                         <div className="text-right text-[10px] text-slate-400 font-semibold uppercase tracking-wider">
                           {((currentStepAnswer as string) || '').length} / 200 characters

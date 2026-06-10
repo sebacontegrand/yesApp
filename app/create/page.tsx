@@ -53,6 +53,7 @@ export default function CreatorPage() {
 
   // Share URL state
   const [shareUrl, setShareUrl] = useState('');
+  const [shortening, setShortening] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -160,12 +161,35 @@ export default function CreatorPage() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const getWhatsAppLink = () => {
+  const shortenUrl = async (longUrl: string): Promise<string> => {
+    try {
+      const res = await fetch(`/api/shorten?url=${encodeURIComponent(longUrl)}`);
+      const data = await res.json();
+      return data.url || longUrl;
+    } catch {
+      return longUrl;
+    }
+  };
+
+  const [shortUrl, setShortUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    setShortUrl(null);
+  }, [config]);
+
+  const handleWhatsAppShare = async () => {
+    setShortening(true);
+    let link = shortUrl;
+    if (!link) {
+      link = await shortenUrl(shareUrl);
+      setShortUrl(link);
+    }
+    setShortening(false);
     const sender = config.senderName || 'Someone';
     const text = encodeURIComponent(
-      `Hey! ${sender} sent you a special invitation link. You can check it out here:\n\n${shareUrl}`
+      `Hey! ${sender} sent you a special invitation link. You can check it out here:\n\n${link}`
     );
-    return `https://wa.me/?text=${text}`;
+    window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
   };
 
   const selectedTheme = CARD_THEMES.find((t) => t.key === config.theme) || CARD_THEMES[0];
@@ -570,14 +594,18 @@ export default function CreatorPage() {
 
                   {/* Actions buttons */}
                   <div className="grid sm:grid-cols-2 gap-3">
-                    <a
-                      href={getWhatsAppLink()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-sm flex items-center justify-center gap-2 cursor-pointer transition-colors text-center"
+                    <button
+                      onClick={handleWhatsAppShare}
+                      disabled={shortening}
+                      className="py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-500 text-white font-semibold text-sm shadow-sm flex items-center justify-center gap-2 cursor-pointer transition-colors text-center"
                     >
-                      <Share2 className="w-4.5 h-4.5" /> Share on WhatsApp
-                    </a>
+                      {shortening ? (
+                        <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      ) : (
+                        <Share2 className="w-4.5 h-4.5" />
+                      )}
+                      {shortening ? 'Shortening...' : 'Share on WhatsApp'}
+                    </button>
                     <button
                       onClick={handleCopyLink}
                       className="py-3.5 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold text-sm hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center justify-center gap-2 cursor-pointer transition-all"

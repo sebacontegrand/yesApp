@@ -156,7 +156,7 @@ function ConfirmedPageContent() {
       text += `I said YES! Can't wait! ❤️`;
     }
 
-    return `https://wa.me/?text=${encodeURIComponent(text)}`;
+    return `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
   };
 
   // Container motion presets
